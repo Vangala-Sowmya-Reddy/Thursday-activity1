@@ -6,6 +6,7 @@ public class Book {
 	String bookAuthor;
 	String description;
 	double bookPrice;
+	String bookUrl;
 	public Book()
 	{
 		super();
@@ -40,13 +41,20 @@ public class Book {
 	public void setBookPrice(double bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	public Book(int bookId, String bookName, String bookAuthor, String description, double bookPrice) {
+	public String getBookUrl() {
+		return bookUrl;
+	}
+	public void setBookUrl(String bookUrl) {
+		this.bookUrl = bookUrl;
+	}
+	public Book(int bookId, String bookName, String bookAuthor, String description, double bookPrice,String bookUrl) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
 		this.description = description;
 		this.bookPrice = bookPrice;
+		this.bookUrl=bookUrl;
 	}
 	
 }

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.bookproject.BookDAO;
+import com.bookproject.dao.BookDAO;
 import com.bookproject.dbconfig.DBConfig;
 import com.bookproject.entity.Book;
 
@@ -31,10 +31,8 @@ public class BookDAOImpl implements BookDAO{
 		{
 		
 			Statement st=con.createStatement();
-			st.executeUpdate("create table book1(book_id int primary key,book_name varchar(20),book_author varchar(20),book_description varchar(30),book_price double)");
+			st.executeUpdate("create table book1(book_id int primary key,book_name varchar(20),book_author varchar(20),book_description varchar(30),book_price double,book_url varchar(35))");
 			System.out.println("Table is successfully created");
-			//else
-				//System.out.println("some error in creating table");
 		}
 		catch(SQLException e)
 		{
@@ -48,12 +46,13 @@ public class BookDAOImpl implements BookDAO{
 		try
 		{
 			con.setAutoCommit(false);
-			PreparedStatement ps=con.prepareStatement("insert into Book1 values(?,?,?,?,?)");
+			PreparedStatement ps=con.prepareStatement("insert into book1 values(?,?,?,?,?,?)");
 			ps.setInt(1,b.getBookId());
 			ps.setString(2,b.getBookName());
 			ps.setString(3,b.getBookAuthor());
 			ps.setString(4,b.getDescription());
 			ps.setDouble(5,b.getBookPrice());
+			ps.setString(6,b.getBookUrl());
 	        int rowsAffected=ps.executeUpdate();
 	       if(rowsAffected >0)
 	        {
@@ -77,7 +76,7 @@ public class BookDAOImpl implements BookDAO{
 			try
 			{
 				
-				PreparedStatement ps=con.prepareStatement("insert into Book1 values(?,?,?,?,?)");
+				PreparedStatement ps=con.prepareStatement("delete from book1 where book_name='java'");
 				ps.executeUpdate();
 				System.out.println("Book is deleted successfully");
 			}
@@ -88,23 +87,17 @@ public class BookDAOImpl implements BookDAO{
 			
 		}
 		
-		public int updateBook() throws SQLException
+		/*public int updateBook() throws SQLException
 		{
-			PreparedStatement ps=con.prepareStatement("update book set book_name='Health is Wealth' where book_id=2");
+			PreparedStatement ps=con.prepareStatement("update book1 set book_name='Health is Wealth' where book_id=20");
 			int rowsUpdated=ps.executeUpdate();
 			System.out.println("number of rows updated is "+rowsUpdated);
 			return rowsUpdated;
-		}
+		}*/
 
-		public boolean insertBook(java.awt.print.Book b) {
-			// TODO Auto-generated method stub
-			return false;
-		}
+		
 
-		public List<java.awt.print.Book> getAllBooks() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		
 	}
 	
 
